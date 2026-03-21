@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <title>LANHub Redirector</title>
     <style>
         body { font-family: sans-serif; text-align: center; padding: 50px; background: #f4f4f9; }
@@ -33,7 +36,7 @@
     <script>
         const target = "https://bloggers-penny-restoration-preferences.trycloudflare.com";
         fetch(target + "/static/pixel.png", { mode: 'no-cors', signal: AbortSignal.timeout(4000) })
-            .then(() => window.location.replace(target))
+            .then(() => window.location.replace(target + "?t=" + Date.now()))
             .catch(() => {
                 document.getElementById("checking").style.display = "none";
                 document.getElementById("error-msg").style.display = "block";
