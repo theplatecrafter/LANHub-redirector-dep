@@ -27,11 +27,11 @@
         <div id="error-msg" class="error-box">
             <h3>🚫 Server Unreachable</h3>
             <p>The server may be offline or the link may have changed.</p>
-            <p><a href="https://comm-sprint-idea-challenge.trycloudflare.com">https://comm-sprint-idea-challenge.trycloudflare.com</a></p>
+            <p><a href="https://pattern-fathers-guestbook-let.trycloudflare.com">https://pattern-fathers-guestbook-let.trycloudflare.com</a></p>
         </div>
     </div>
     <script>
-        const target = "https://comm-sprint-idea-challenge.trycloudflare.com";
+        const target = "https://pattern-fathers-guestbook-let.trycloudflare.com";
         fetch(target + "/static/pixel.png", { mode: 'no-cors', signal: AbortSignal.timeout(4000) })
             .then(() => window.location.replace(target))
             .catch(() => {
