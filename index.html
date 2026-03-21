@@ -34,13 +34,34 @@
         </div>
     </div>
     <script>
-        const target = "https://bloggers-penny-restoration-preferences.trycloudflare.com";
-        fetch(target + "/static/pixel.png", { mode: 'no-cors', signal: AbortSignal.timeout(4000) })
-            .then(() => window.location.replace(target + "?t=" + Date.now()))
-            .catch(() => {
-                document.getElementById("checking").style.display = "none";
-                document.getElementById("error-msg").style.display = "block";
-            });
-    </script>
+    const tunnelUrl = "https://bloggers-penny-restoration-preferences.trycloudflare.com";
+    const lanUrl    = "http://172.24.135.97:5000";
+
+    function goTunnel() {
+        window.location.replace(tunnelUrl);
+    }
+
+    if (lanUrl) {
+        // Probe the LAN IP first — short timeout
+        const controller = new AbortController();
+        const timer = setTimeout(() => { controller.abort(); goTunnel(); }, 2000);
+
+        fetch(lanUrl + "/static/pixel.png", {
+            mode: "no-cors",
+            signal: controller.signal
+        })
+        .then(() => {
+            clearTimeout(timer);
+            window.location.replace(lanUrl);
+        })
+        .catch(() => {
+            clearTimeout(timer);
+            goTunnel();
+        });
+    } else {
+        goTunnel();
+    }
+</script>
+
 </body>
 </html>
